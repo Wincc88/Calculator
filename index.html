@@ -7,6 +7,212 @@
     <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
+
+       <div class="display">
+        <p>Left: <span id="numToLeft">0</span>    
+           Mid: <span id="operatorInMiddle"></span>
+           Right:<span id="numToRight">0</span>
+        </p>
+       </div>
+       <div><p>=<span id="displayAnswer">dummy 0</span></p></div>
+
+        <div id="btncontainer">
+            <button id="Zero" name=0>0</button>
+            <button id="One" name=1>1</button>
+            <button id="Two" name=2>2</button>
+            <button id="Three" name=3>3</button>
+            <button id="Four" name=4>4</button>
+            <button id="Five" name=5>5</button>
+            <button id="Six" name=6>6</button>
+            <button id="Seven" name=7>7</button>
+            <button id="Eight" name=8>8</button>
+            <button id="Nine" name=9>9</button>
+            <button id="Multiply" name=x>X</button>
+            <button id="Divide" name=÷>÷</button>
+            <button id="Add" name=+>+</button>
+            <button id="Subtract" name=->-</button>
+            <button id="Equalsto" name==>=</button>
+            <button id="ClearAll" name=C>C</button>
+            <button id="ErasetoLeft" name=Er>Er</button>
+            <button id="Dot" name=.>.</button>
+        </div>
+
+
+    <script>
+        
+        function addNumbers(num1, num2) {
+            return num1 + num2;
+        }
+        console.log(addNumbers(3, 40));
+
+        function subtractNumbers(num1, num2) {
+            return num1 - num2;
+        }
+        console.log(subtractNumbers(0, 40));
+        console.log(subtractNumbers(40, 4));
+
+        function multiplyNumbers(num1, num2) {
+            return num1 * num2;
+        }
+        console.log(multiplyNumbers(3, 40));
+        
+        
+        function divideNumbers(num1, num2) {
+            while (true) {
+                if (num2 === 0) {
+                    console.log("can't divide by zero");
+                    break;
+                }  
+           
+            return num1 / num2;
+            }
+        }
+        
+        console.log(divideNumbers(2, 1));
+        console.log(divideNumbers(2, 0));
+
+        let newNum1 = 0;
+        let newNum2 = 0;
+        let currentOperator = ["add", "subtract", "multiply", "divide"];
+
+        
+        function operate(currentOperator, newNum1, newNum2) {
+            if (currentOperator === "add") {
+                return (addNumbers (newNum1, newNum2));            
+            } 
+            else if (currentOperator === "subtract") {
+                return (subtractNumbers (newNum1, newNum2));
+            }
+            else if (currentOperator === "multiply") {
+                return (multiplyNumbers (newNum1, newNum2));
+            }
+            else if (currentOperator === "divide") {
+                return (divideNumbers (newNum1, newNum2));
+            }
+        }
+            
+        console.log(operate("add", 56, 40));
+        console.log(operate('add', 3, 40));
+        console.log(operate("subtract", 43, 56));
+        console.log(operate("subtract", 59, 40));
+        console.log(operate("subtract", 4, 5));
+        console.log(operate("multiply", 4, 2));
+        console.log(operate("divide", 50, 0));
+        console.log(operate("divide", 150, 10));
+
+        const buttons = document.querySelectorAll("button");
+               buttons.forEach((button) => {
+                    button.addEventListener("click", () => {
+                          
+                     buttonClicked = button.name;
+                     
+                      
+                     
+         updateNumbers();
+            
+         displayNumbers();
+
+
+                 })
+        })
+
+        
+        
+        
+        let allClicks = [];  //moved outside to capture each click in an array
+        //let textClicked;     //made the array characters into strings // should have intialized to empty string/number
+        let allSecondClicks = [];
+       // let secondTextClicked; // this mistake should have been empty string/number
+       //let numClicked = ["", "", ""];
+        let firstTextClicked = ""
+        let secondTextClicked = "";
+        let operator = "";
+    
+       
+
+        
+       
+             //remove dot(.) later so can input floating numbers
+        function updateNumbers() {   
+             
+            if (!(buttonClicked === "-" || buttonClicked === "x" || buttonClicked === "÷" 
+            || buttonClicked === "+" || buttonClicked === "=" || buttonClicked === "C" 
+            || buttonClicked === "Er" || buttonClicked === ".")) {
+
+                if(operator === "") {
+                    allClicks.push(buttonClicked);
+                    firstTextClicked = allClicks.join("");
+                    console.log(firstTextClicked);
+                    newNum1 = parseFloat(firstTextClicked);   
+                    return newNum1; 
+                    
+                } else  {
+                    allSecondClicks.push(buttonClicked);
+                    secondTextClicked = allSecondClicks.join("");
+                    console.log(secondTextClicked);
+                    newNum2 = parseFloat(secondTextClicked);
+                    return newNum2;
+                }
+
+            }      
+     
+            else if (buttonClicked === "x") {
+                currentOperator = "multiply";
+                console.log(currentOperator);
+                operator = buttonClicked;
+                console.log(operator);
+                //return buttonClicked;
+                return currentOperator;
+            }
+            else if (buttonClicked === "÷") {
+                currentOperator = "divide";
+                console.log(currentOperator);
+                operator = buttonClicked;
+                console.log(operator);
+                return currentOperator;
+            }
+            else if (buttonClicked === "-") {
+                currentOperator = "subtract";
+                console.log(currentOperator);
+                operator = buttonClicked;
+                console.log(operator);
+                return currentOperator;
+            }
+            else if (buttonClicked === "+") {
+                currentOperator = "add";
+                operator = buttonClicked;
+                console.log(operator);
+                return currentOperator;
+            }
+         
+        }  
+        
+                     
+                
+
+
+         
+                 
+        function displayNumbers() {
+            document.getElementById("numToLeft").textContent = newNum1;
+
+           /** 
+            if (buttonClicked === "-" || buttonClicked === "x" || buttonClicked === "÷" 
+            || buttonClicked === "+") {
+                document.getElementById("operatorInMiddle").textContent = buttonClicked;     
+            }**/
+
+            document.getElementById("operatorInMiddle").textContent = operator;
+    
+
+            document.getElementById("numToRight").textContent = newNum2; 
+            //document.getElementById("displayAnswer").textContent = operateAnswer;           
+        }          
+        //console.log(operate(0, 76, 40)); 
+
+
+
+    </script>
     
 </body>
 </html>
