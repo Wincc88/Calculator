@@ -9,12 +9,12 @@
 <body>
 
        <div class="display">
-        <p>Left: <span id="numToLeft">0</span>    
+        <p>Left: <span id="numToLeft"></span>    
            Mid: <span id="operatorInMiddle"></span>
-           Right:<span id="numToRight">0</span>
+           Right:<span id="numToRight"></span>
         </p>
        </div>
-       <div><p>=<span id="displayAnswer">dummy 0</span></p></div>
+       <div><p>=<span id="displayAnswer"></span></p></div>
 
         <div id="btncontainer">
             <button id="Zero" name=0>0</button>
@@ -58,22 +58,21 @@
         
         
         function divideNumbers(num1, num2) {
-            while (true) {
-                if (num2 === 0) {
-                    console.log("can't divide by zero");
-                    break;
-                }  
            
-            return num1 / num2;
-            }
+            if (num2 === 0) {
+                  //console.log("can't divide by zero");
+                  return "can't divide by zero";  // have to return to show in the display
+                }
+            return num1 / num2;           
         }
         
-        console.log(divideNumbers(2, 1));
-        console.log(divideNumbers(2, 0));
+         console.log(divideNumbers(2, 1));
+         console.log(divideNumbers(2, 0));
 
-        let newNum1 = 0;
-        let newNum2 = 0;
+        let newNum1; 
+        let newNum2;
         let currentOperator = ["add", "subtract", "multiply", "divide"];
+        let answer;
 
         
         function operate(currentOperator, newNum1, newNum2) {
@@ -105,9 +104,34 @@
                     button.addEventListener("click", () => {
                           
                      buttonClicked = button.name;
-                     
+                        
+                                if(operator === "") {
+                                    if (buttonClicked === ".") { 
+                                        countDecimal++;
+                                    }
+                                    
+                                    if (firstTextClicked.includes(".") && buttonClicked ==="." && countDecimal > 1) {
+                                        return;
+                                    } 
+                                }
+                                else {
+                                    if (buttonClicked === ".") { 
+                                        secondCounter++;
+                                    }
+                                    if (secondTextClicked.includes(".") && buttonClicked ==="." && secondCounter > 1) {
+                                        return;
+                                    }
+                                }
                       
                      
+         enterNumbers();
+
+         enterOperators();
+
+         clearNums();
+
+         calcAll();
+
          updateNumbers();
             
          displayNumbers();
@@ -119,82 +143,186 @@
         
         
         
-        let allClicks = [];  //moved outside to capture each click in an array
-        //let textClicked;     //made the array characters into strings // should have intialized to empty string/number
-        let allSecondClicks = [];
-       // let secondTextClicked; // this mistake should have been empty string/number
-       //let numClicked = ["", "", ""];
+        //let allClicks = []; //allClicks.push(buttonClicked); not needed anymore with empty strings buttons capture 
         let firstTextClicked = ""
         let secondTextClicked = "";
         let operator = "";
+        let total = "";
+        let setOperator = false; // will be used to check operator
+        let countDecimal = 0;
+        let secondCounter = 0;
+        
     
        
 
         
        
              //remove dot(.) later so can input floating numbers
-        function updateNumbers() {   
+        function enterNumbers() {   
              
             if (!(buttonClicked === "-" || buttonClicked === "x" || buttonClicked === "÷" 
             || buttonClicked === "+" || buttonClicked === "=" || buttonClicked === "C" 
-            || buttonClicked === "Er" || buttonClicked === ".")) {
+            || buttonClicked === "Er")) {
 
-                if(operator === "") {
-                    allClicks.push(buttonClicked);
-                    firstTextClicked = allClicks.join("");
-                    console.log(firstTextClicked);
-                    newNum1 = parseFloat(firstTextClicked);   
-                    return newNum1; 
+                    if(operator === "") {
+                        firstTextClicked = firstTextClicked + buttonClicked;
+                        console.log(firstTextClicked);  
+                        return firstTextClicked; 
+                        
+                    } else  {
+                        secondTextClicked = secondTextClicked + buttonClicked;
+                        console.log(secondTextClicked);
+                        return secondTextClicked;
+                    }
                     
-                } else  {
-                    allSecondClicks.push(buttonClicked);
-                    secondTextClicked = allSecondClicks.join("");
-                    console.log(secondTextClicked);
-                    newNum2 = parseFloat(secondTextClicked);
-                    return newNum2;
-                }
 
-            }      
-     
-            else if (buttonClicked === "x") {
-                currentOperator = "multiply";
-                console.log(currentOperator);
-                operator = buttonClicked;
-                console.log(operator);
-                //return buttonClicked;
-                return currentOperator;
+            }  
+        }
+    
+      
+            
+        function enterOperators() {
+            if (buttonClicked === "x") {
+                    if (firstTextClicked === "") {
+                        alert("enter first number");
+                        return;
+
+                    } else {
+                        currentOperator = "multiply";
+                        //console.log(currentOperator);
+                        operator = buttonClicked;
+                        //console.log(operator);
+                        return currentOperator;}
+
+                
             }
             else if (buttonClicked === "÷") {
-                currentOperator = "divide";
-                console.log(currentOperator);
-                operator = buttonClicked;
-                console.log(operator);
-                return currentOperator;
+                    if (firstTextClicked === "") {
+                        alert("enter first number");
+                        return;
+                        
+                    } else {
+                        currentOperator = "divide";
+                        //console.log(currentOperator);
+                        operator = buttonClicked;
+                        //console.log(operator);
+                        return currentOperator;
+                    }
+
+
             }
             else if (buttonClicked === "-") {
-                currentOperator = "subtract";
-                console.log(currentOperator);
-                operator = buttonClicked;
-                console.log(operator);
-                return currentOperator;
+                    if (firstTextClicked === "") {
+                        alert("enter first number");
+                        return;
+                    
+                    } else {
+                        currentOperator = "subtract";
+                        //console.log(currentOperator);
+                        operator = buttonClicked;
+                        //console.log(operator);
+                        return currentOperator;
+                }
             }
             else if (buttonClicked === "+") {
-                currentOperator = "add";
-                operator = buttonClicked;
-                console.log(operator);
-                return currentOperator;
+                    if (firstTextClicked === "") {
+                        alert("enter first number");
+                        return;
+                    
+                    } else {
+                    currentOperator = "add";
+                    operator = buttonClicked;
+                    //console.log(operator);
+                    return currentOperator;
+                }
             }
-         
-        }  
+        }
         
-                     
+        function calcAll() {
+            if (buttonClicked === "=") {
                 
+                if (firstTextClicked === "") {
+                    alert("enter first number");
+                    return;
+                    
+                }
+                else if (operator === "") {
+                    alert("enter an operator");
+                    return; 
+                }
+                else if (secondTextClicked === "") {
+                    alert("enter second number");
+                    return;
+                }
+
+                             
+                newNum1 = Number(firstTextClicked);
+                newNum2 = Number(secondTextClicked);
+                answer = (operate(currentOperator, newNum1, newNum2));
+                total = String(answer);
+                return total; 
+                
+            }
+        }
+ 
+        function clearNums() {
+            if (buttonClicked === "C") {
+               firstTextClicked = "";
+               secondTextClicked = "";
+               operator = "";
+               total = "";   // doubles the answers if use only total
+               //setOperator = false;
+               
+            } 
+
+             
+        }  
+
+
+        function updateNumbers() {
+            if(total !== "" && (!(buttonClicked === "-" || buttonClicked === "x" || buttonClicked === "÷" 
+                || buttonClicked === "+" || buttonClicked === "=" || buttonClicked === "C" 
+                || buttonClicked === "Er" || buttonClicked === "."))) {
+
+                firstTextClicked = total;  // set condition to make it unchange like setoperations = true 
+                
+                secondTextClicked = ""; 
+                operator = "";
+                total = ""; 
+            }
+        }
+
+        /**
+        function updateNumbers() {
+            if(total !== "" && (!(buttonClicked === "-" || buttonClicked === "x" || buttonClicked === "÷" 
+                || buttonClicked === "+" || buttonClicked === "=" || buttonClicked === "C" 
+                || buttonClicked === "Er" || buttonClicked === "."))) {
+
+                firstTextClicked = total;
+                secondTextClicked = ""; 
+                total = "";              // got this right!
+                
+                
+                allClicks.push(buttonClicked); 
+                console.log(allClicks);
+                //let thu = allClicks.toString();
+                //console.log(thu);
+                secondTextClicked = allClicks.join(""); // accumulating here, review so only new nums show
+                
+                
+            }
+        } **/
+      
+        
+       
+
+
 
 
          
                  
         function displayNumbers() {
-            document.getElementById("numToLeft").textContent = newNum1;
+            document.getElementById("numToLeft").textContent = firstTextClicked;//newNum1;
 
            /** 
             if (buttonClicked === "-" || buttonClicked === "x" || buttonClicked === "÷" 
@@ -205,8 +333,8 @@
             document.getElementById("operatorInMiddle").textContent = operator;
     
 
-            document.getElementById("numToRight").textContent = newNum2; 
-            //document.getElementById("displayAnswer").textContent = operateAnswer;           
+            document.getElementById("numToRight").textContent = secondTextClicked; //newNum2; 
+            document.getElementById("displayAnswer").textContent = total; //answer;           
         }          
         //console.log(operate(0, 76, 40)); 
 
@@ -215,4 +343,4 @@
     </script>
     
 </body>
-</html>
+</htm
