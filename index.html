@@ -7,67 +7,86 @@
     <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
+ 
+    <div class="Calculator">
 
-       <div class="display">
-        <p>Left: <span id="numToLeft"></span>    
-           Mid: <span id="operatorInMiddle"></span>
-           Right:<span id="numToRight"></span>
-        </p>
-       </div>
-       <div><p>=<span id="displayAnswer"></span></p></div>
+            <div class="display">
+                <p>Left: <span id="numToLeft"></span>    
+                Mid: <span id="operatorInMiddle"></span>
+                Right:<span id="numToRight"></span>
+                </p>
+            </div>
 
-        <div id="btncontainer">
-            <button id="Zero" name=0>0</button>
-            <button id="One" name=1>1</button>
-            <button id="Two" name=2>2</button>
-            <button id="Three" name=3>3</button>
-            <button id="Four" name=4>4</button>
-            <button id="Five" name=5>5</button>
-            <button id="Six" name=6>6</button>
-            <button id="Seven" name=7>7</button>
-            <button id="Eight" name=8>8</button>
-            <button id="Nine" name=9>9</button>
-            <button id="Multiply" name=x>X</button>
-            <button id="Divide" name=÷>÷</button>
-            <button id="Add" name=+>+</button>
-            <button id="Subtract" name=->-</button>
-            <button id="Equalsto" name==>=</button>
-            <button id="ClearAll" name=C>C</button>
-            <button id="ErasetoLeft" name=Er>Er</button>
-            <button id="Dot" name=.>.</button>
-        </div>
+            <div class="middleDiv">
+                <p>= <span id="displayAnswer"></span></p>
+            </div>
+            
+            <div class="wholeButtons">
 
+                   <div id="btncontainer">
+
+                         <div id="clearContainer">
+                            <button id="ClearAll" name=C>C</button>
+                            <button id="ErasetoLeft" name=Er>Er</button>
+                         </div>
+                         
+                         <div id="numberContainer">
+                            <button id="Seven" name=7>7</button>
+                            <button id="Eight" name=8>8</button>
+                            <button id="Nine" name=9>9</button>
+                            <button id="Four" name=4>4</button>
+                            <button id="Five" name=5>5</button>
+                            <button id="Six" name=6>6</button>
+                            <button id="One" name=1>1</button>
+                            <button id="Two" name=2>2</button>
+                            <button id="Three" name=3>3</button>
+                         </div>
+                        
+                         <div id="zeroContainer">
+                            <button id="Dot" name=.>.</button>
+                            <button id="Zero" name=0>0</button>
+                         </div>
+                   </div>
+                   
+                    <div class="opbuttons">
+                        <button id="Multiply" name=x>X</button>
+                        <button id="Divide" name=÷>÷</button>
+                        <button id="Add" name=+>+</button>
+                        <button id="Subtract" name=->-</button>
+                        <button id="Equalsto" name==>=</button>
+                    </div>
+                        
+                        
+            </div>
+            
+    </div>
 
     <script>
         
-        function addNumbers(num1, num2) {
-            return num1 + num2;
+        function addNumbers(a, b) {
+            return a + b;
         }
-        console.log(addNumbers(3, 40));
 
-        function subtractNumbers(num1, num2) {
-            return num1 - num2;
+        function subtractNumbers(a, b) {
+            return a - b;
         }
-        console.log(subtractNumbers(0, 40));
-        console.log(subtractNumbers(40, 4));
 
-        function multiplyNumbers(num1, num2) {
-            return num1 * num2;
+        function multiplyNumbers(a, b) {
+            return a * b;
         }
-        console.log(multiplyNumbers(3, 40));
         
         
-        function divideNumbers(num1, num2) {
-           
-            if (num2 === 0) {
-                  //console.log("can't divide by zero");
-                  return "can't divide by zero";  // have to return to show in the display
+        function divideNumbers(a, b) {
+            
+                if (b === 0){
+                    return "can't divide by zero";
                 }
-            return num1 / num2;           
+                return a/b;        
         }
         
-         console.log(divideNumbers(2, 1));
-         console.log(divideNumbers(2, 0));
+         //console.log(divideNumbers(2, 1));
+         //console.log(divideNumbers(2, 0));
+         
 
         let newNum1; 
         let newNum2;
@@ -89,7 +108,9 @@
                 return (divideNumbers (newNum1, newNum2));
             }
         }
-            
+
+    
+        /**
         console.log(operate("add", 56, 40));
         console.log(operate('add', 3, 40));
         console.log(operate("subtract", 43, 56));
@@ -98,20 +119,23 @@
         console.log(operate("multiply", 4, 2));
         console.log(operate("divide", 50, 0));
         console.log(operate("divide", 150, 10));
+        **/
 
         const buttons = document.querySelectorAll("button");
                buttons.forEach((button) => {
                     button.addEventListener("click", () => {
+                        
                           
                      buttonClicked = button.name;
+                     
                                
                                 if(operator === "") {
-                                    //operator === "" used to for reference in secondtextClicked
+                                    //operator === "" used for reference in secondNum
                                     if (buttonClicked === ".") { 
                                         countDecimal++;
                                     }
                                     
-                                    if (firstTextClicked.includes(".") && buttonClicked ==="." && countDecimal > 1) {
+                                    if (firstNum.includes(".") && buttonClicked ==="." && countDecimal > 1) {
                                         return;
                                     } 
                                 }
@@ -119,17 +143,35 @@
                                     if (buttonClicked === ".") { 
                                         secondCounter++;
                                     }
-                                    if (secondTextClicked.includes(".") && buttonClicked ==="." && secondCounter > 1) {
+                                    if (secondNum.includes(".") && buttonClicked ==="." && secondCounter > 1) {
                                         return;
                                     }
                                 }
+
+                                if (firstNum !== "" && operator !== "" && secondNum !== "" && total !== "" && (!isNaN(total))){
+
+                                        if (buttonClicked === "x" || buttonClicked === "÷" || buttonClicked === "-" 
+                                        || buttonClicked === "+") {
+
+                                            if(buttonClicked !== operator) {
+                                                buttonClicked = "${.opbuttons}"; //records last operator to compare
+                                                //console.log("which button");
+                                                return;
+                                            }
+
+                                        }
+                                }
+                                
+        
                       
                      
          enterNumbers();
-
+         
          enterOperators();
 
          clearNums();
+
+         eraseNumtoLeft();
 
          calcAll();
 
@@ -142,107 +184,125 @@
         })
 
         
+        document.addEventListener("keydown", (event) => {
+            keyName = event.key;
+
+            if(keyName === "*") {
+                buttonClicked = "x";
+                keyName = buttonClicked;
+            }
+
+            if(keyName === "/") {
+                buttonClicked = "÷";
+                keyName = buttonClicked;
+            }
+            
+            if(keyName === "Enter") {
+                event.preventDefault();
+                buttonClicked = "=";
+                keyName = buttonClicked;
+            }
+
+            if(keyName === "Backspace") {
+                buttonClicked = "Er";
+                keyName = buttonClicked;
+            }   
+
+            if (keyName === "Delete") {
+                event.preventDefault();
+                buttonClicked = "C";
+                keyName = buttonClicked;
+            } 
+
+            const button = document.querySelector(`button[name="${keyName}"]`);
+            if (button) {
+                button.click();
+            };
+            
+        
+            //false;
+        })
+
         
         
-        //let allClicks = []; //allClicks.push(buttonClicked); not needed anymore with empty strings buttons capture 
-        let firstTextClicked = ""
-        let secondTextClicked = "";
+        
+        let firstNum = ""
+        let secondNum = "";
         let operator = "";
         let total = "";
-        let setOperator = false; // will be used to check operator
+        let setOperator = true; // will be used to check operator
         let countDecimal = 0;
         let secondCounter = 0;
-        
-    
+     
+             
+            
        
-
-        
-       
-             //remove dot(.) later so can input floating numbers
         function enterNumbers() {   
              
-            if (!(buttonClicked === "-" || buttonClicked === "x" || buttonClicked === "÷" 
-            || buttonClicked === "+" || buttonClicked === "=" || buttonClicked === "C" 
-            || buttonClicked === "Er")) {
+            if ((buttonClicked >= "0" && buttonClicked <= "9") || buttonClicked === ".") {
 
                     if(operator === "") {
-                        firstTextClicked = firstTextClicked + buttonClicked;
-                        console.log(firstTextClicked);  
-                        return firstTextClicked; 
+                        firstNum = firstNum + buttonClicked;
+                        console.log(firstNum);  
+                        return firstNum; 
                         
                     } else  {
-                        secondTextClicked = secondTextClicked + buttonClicked;
-                        console.log(secondTextClicked);
-                        return secondTextClicked;
-                    }
-                    
-
+                        secondNum = secondNum + buttonClicked;
+                        console.log(secondNum);
+                        return secondNum;
+                    }                  
             }  
         }
-    
+
       
             
         function enterOperators() {
-            if (buttonClicked === "x") {
-                    if (firstTextClicked === "") {
+            
+            if (buttonClicked === "x" || buttonClicked === "÷" || buttonClicked === "-" || buttonClicked === "+") {
+                    if (firstNum === "") {
                         alert("enter first number");
-                        return;
-
-                    } else {
-                        currentOperator = "multiply";
-                        //console.log(currentOperator);
-                        operator = buttonClicked;
-                        //console.log(operator);
-                        return currentOperator;}
-
-                
+                        return;  
+                    }
             }
+
+            
+            if (buttonClicked === "x") {
+                    currentOperator = "multiply";
+                    //console.log(currentOperator);
+                    operator = buttonClicked;
+                    //console.log(operator);
+                    return currentOperator; 
+                }
+            
             else if (buttonClicked === "÷") {
-                    if (firstTextClicked === "") {
-                        alert("enter first number");
-                        return;
-                        
-                    } else {
                         currentOperator = "divide";
                         //console.log(currentOperator);
                         operator = buttonClicked;
                         //console.log(operator);
                         return currentOperator;
-                    }
-
-
             }
+
             else if (buttonClicked === "-") {
-                    if (firstTextClicked === "") {
-                        alert("enter first number");
-                        return;
-                    
-                    } else {
                         currentOperator = "subtract";
                         //console.log(currentOperator);
                         operator = buttonClicked;
                         //console.log(operator);
                         return currentOperator;
-                }
             }
+
             else if (buttonClicked === "+") {
-                    if (firstTextClicked === "") {
-                        alert("enter first number");
-                        return;
-                    
-                    } else {
                     currentOperator = "add";
                     operator = buttonClicked;
                     //console.log(operator);
                     return currentOperator;
-                }
-            }
+            } 
+            
         }
         
         function calcAll() {
             if (buttonClicked === "=") {
                 
-                if (firstTextClicked === "") {
+                if (firstNum === "") {
                     alert("enter first number");
                     return;
                     
@@ -251,93 +311,103 @@
                     alert("enter an operator");
                     return; 
                 }
-                else if (secondTextClicked === "") {
+                else if (secondNum === "") {
                     alert("enter second number");
                     return;
                 }
 
                              
-                newNum1 = Number(firstTextClicked);
-                newNum2 = Number(secondTextClicked);
+                newNum1 = Number(firstNum);
+                newNum2 = Number(secondNum);
                 answer = (operate(currentOperator, newNum1, newNum2));
-                total = String(answer);
-                return total; 
+                //console.log(typeof answer);
+                        if(isNaN(answer)) {
+                            total = "can't divide by zero";
+                        }
+                        else {
+                        //console.log(isNaN(answer));
+                        answer = answer.toFixed(2);
+                        total = answer;    
+                        //console.log(isNaN(total));
+                        }
+                return total;
+                
                 
             }
         }
  
         function clearNums() {
             if (buttonClicked === "C") {
-               firstTextClicked = "";
-               secondTextClicked = "";
+               firstNum = "";
+               secondNum = "";
                operator = "";
                total = "";   // doubles the answers if use only total
-               //setOperator = false;
-               
-            } 
+            }       
+        }  
 
-             
+        
+        function eraseNumtoLeft() {
+            if ((total === "" || isNaN(total)) && buttonClicked === "Er") {
+
+                if (firstNum === "") {
+                    alert("enter first number");
+                    return;
+                }
+                
+                if(operator === "") {
+
+                        firstNum = firstNum.slice(0, -1);
+                        console.log(firstNum);
+                }
+
+                else {
+                    if (secondNum === "") {
+                    alert("enter second number");
+                    return;
+                    }
+                        
+                        secondNum = secondNum.slice(0, -1);
+                        console.log(secondNum);
+                }
+            }
+     
         }  
 
 
         function updateNumbers() {
-            if(total !== "" && (!(buttonClicked === "-" || buttonClicked === "x" || buttonClicked === "÷" 
-                || buttonClicked === "+" || buttonClicked === "=" || buttonClicked === "C" 
-                || buttonClicked === "Er" || buttonClicked === "."))) {
 
-                firstTextClicked = total;  // set condition to make it unchange like setoperations = true 
-                
-                secondTextClicked = ""; 
-                operator = "";
-                total = ""; 
+            if(total !== "" && (buttonClicked >= "0" && buttonClicked <= "9")) {
+
+                if ((isNaN(total)) && (buttonClicked >= "0" && buttonClicked <= "9")) {
+                    firstNum = "";
+                    secondNum = ""; 
+                    operator = "";
+                    total = "";
+                }
+                else {
+               
+                    firstNum = total;   
+                    secondNum = ""; 
+                    operator = "";
+                    total = ""; 
+                }
             }
         }
 
-        /**
-        function updateNumbers() {
-            if(total !== "" && (!(buttonClicked === "-" || buttonClicked === "x" || buttonClicked === "÷" 
-                || buttonClicked === "+" || buttonClicked === "=" || buttonClicked === "C" 
-                || buttonClicked === "Er" || buttonClicked === "."))) {
-
-                firstTextClicked = total;
-                secondTextClicked = ""; 
-                total = "";              // got this right!
-                
-                
-                allClicks.push(buttonClicked); 
-                console.log(allClicks);
-                //let thu = allClicks.toString();
-                //console.log(thu);
-                secondTextClicked = allClicks.join(""); // accumulating here, review so only new nums show
-                
-                
-            }
-        } **/
-      
-        
        
-
-
-
-
+      
          
                  
         function displayNumbers() {
-            document.getElementById("numToLeft").textContent = firstTextClicked;//newNum1;
+           document.getElementById("numToLeft").textContent = firstNum;
 
-           /** 
-            if (buttonClicked === "-" || buttonClicked === "x" || buttonClicked === "÷" 
-            || buttonClicked === "+") {
-                document.getElementById("operatorInMiddle").textContent = buttonClicked;     
-            }**/
-
-            document.getElementById("operatorInMiddle").textContent = operator;
+           document.getElementById("operatorInMiddle").textContent = operator;
     
+           document.getElementById("numToRight").textContent = secondNum; 
 
-            document.getElementById("numToRight").textContent = secondTextClicked; //newNum2; 
-            document.getElementById("displayAnswer").textContent = total; //answer;           
+           document.getElementById("displayAnswer").textContent = total;           
         }          
-        //console.log(operate(0, 76, 40)); 
+        
 
 
 

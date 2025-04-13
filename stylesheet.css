@@ -1,6 +1,108 @@
-.display {
-   
-  width: 100%;         
-  background-color: red;
+.Calculator {
+  width: 300px;
+  /**height: 30%;**/
+  border: 5px solid black;
+  background-color: blue;
+  /** align-items: center; **/
+  /**justify-content: center; **/
   display: flex; 
+  flex-direction: column;
+  padding: 5px;
+  margin: 5px; 
+
+}
+
+
+.display, .middleDiv {
+   
+  /** width: 100%;  **/    
+  border: 5px solid greenyellow;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  align-self: stretch;
+  display: flex;  
+  margin: 5px;
+  }
+
+  .display {
+  border: 5px solid wheat;  
+  margin-left: 5px;
+  }
+  
+
+  .middleDiv > p > span {
+    font-size: 18px;
+    text-align: right;
+  }
+
+  .wholeButtons {
+    display: flex;
+    border: 5px solid yellow;
+    align-items: center; 
+    justify-content: center; 
+    display: flex;
+    flex-wrap: nowrap;
+    
+  }
+
+  /**
+  #btncontainer {
+    border: 5px solid gray;
+    background-color: whitesmoke;
+    width: 80%;
+  } **/
+
+  #btncontainer Button {
+    border: 2px solid burlywood;
+    background-color: whitesmoke;
+    width: 30%;
+    margin-bottom: 3px; 
+    padding: 20px;
+    font-size: 16px;
+  }
+
+  #clearContainer, #numberContainer, #zeroContainer {
+    border: 3px solid red;   
+    align-self: self-start;
+    flex-wrap: nowrap;
+  }
+  #clearContainer, #zeroContainer {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+  }
+
+  #clearContainer Button, #zeroContainer Button {
+    margin-top: 4px;
+    margin-left: 3px;
+    margin-right: 4px;
+  }
+  
+  #numberContainer Button {
+    margin-left : 3px;
+  }
+
+   #Zero {
+    flex-grow: 2;
+   }
+ 
+
+  .opbuttons {
+    width: 50%;
+    border: 2px solid black;
+    background-color: aquamarine;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    
+  }
+  .opbuttons Button {
+    border: 2px solid burlywood;
+    background-color: whitesmoke;
+    /**width: 30%; **/
+    margin-top: 4px; 
+    padding: 20px;
+    font-size: 16px;
+    
+    /** display: flexbox; **/
   }
