@@ -11,9 +11,9 @@
     <div class="Calculator">
 
             <div class="display">
-                <p>Left: <span id="numToLeft"></span>    
-                Mid: <span id="operatorInMiddle"></span>
-                Right:<span id="numToRight"></span>
+                <p><span id="numToLeft"></span>    
+                <span id="operatorInMiddle"></span>
+                <span id="numToRight"></span>
                 </p>
             </div>
 
@@ -27,7 +27,7 @@
 
                          <div id="clearContainer">
                             <button id="ClearAll" name=C>C</button>
-                            <button id="ErasetoLeft" name=Er>Er</button>
+                            <button id="ErasetoLeft" name=Backspace>Backspace</button>
                          </div>
                          
                          <div id="numberContainer">
@@ -84,8 +84,6 @@
                 return a/b;        
         }
         
-         //console.log(divideNumbers(2, 1));
-         //console.log(divideNumbers(2, 0));
          
 
         let newNum1; 
@@ -110,16 +108,6 @@
         }
 
     
-        /**
-        console.log(operate("add", 56, 40));
-        console.log(operate('add', 3, 40));
-        console.log(operate("subtract", 43, 56));
-        console.log(operate("subtract", 59, 40));
-        console.log(operate("subtract", 4, 5));
-        console.log(operate("multiply", 4, 2));
-        console.log(operate("divide", 50, 0));
-        console.log(operate("divide", 150, 10));
-        **/
 
         const buttons = document.querySelectorAll("button");
                buttons.forEach((button) => {
@@ -204,7 +192,7 @@
             }
 
             if(keyName === "Backspace") {
-                buttonClicked = "Er";
+                buttonClicked = "Backspace";
                 keyName = buttonClicked;
             }   
 
@@ -230,7 +218,6 @@
         let secondNum = "";
         let operator = "";
         let total = "";
-        let setOperator = true; // will be used to check operator
         let countDecimal = 0;
         let secondCounter = 0;
      
@@ -347,7 +334,7 @@
 
         
         function eraseNumtoLeft() {
-            if ((total === "" || isNaN(total)) && buttonClicked === "Er") {
+            if ((total === "" || isNaN(total)) && buttonClicked === "Backspace") {
 
                 if (firstNum === "") {
                     alert("enter first number");
