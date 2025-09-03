@@ -1,22 +1,19 @@
+
+
 .Calculator {
   width: 300px;
-  /**height: 30%;**/
   border: 1px solid gray;
   background-color: whitesmoke;
-  /** align-items: center; **/
-  /**justify-content: center; **/
   display: flex; 
   flex-direction: column;
   padding: 5px;
   margin: auto; 
+  box-sizing: border-box;
 
 }
 
-
 .display, .middleDiv {
-   
- /** width: 100%; 
-  height: auto; **/
+  max-height: 32px;
   border: 5px solid whitesmoke;
   border-radius: 5px;
   background-color: whitesmoke;
