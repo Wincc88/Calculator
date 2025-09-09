@@ -13,7 +13,7 @@
 }
 
 .display, .middleDiv {
-  max-height: 32px;
+  max-height: 32px;        /* prevents space moving when text inputed */
   border: 5px solid whitesmoke;
   border-radius: 5px;
   background-color: whitesmoke;
@@ -103,4 +103,26 @@
     font-size: 16px;
   }
 
- 
+  @media screen and (max-width: 600px) {
+    
+    .Calculator {
+      justify-content: center;
+      align-items: center;
+      margin-top: 40px;
+      box-sizing: border-box;
+    
+    }
+   
+    .wholeButtons {
+      border: none;
+    }
+
+    .display, .middleDiv {
+      font-size: 14px;
+      border: none;
+      min-height: 40px;   /* prevents space moving when text inputed */
+      font-family: monospace;
+    }
+
+
+  }
